@@ -36,7 +36,20 @@ class MyClient(discord.Client):
             "<:Bitcoin1:1053606653309747210> Current Price Is " +
             data["bpi"]["USD"]["rate"] + " US Dollar")
 
+        if message.content.startswith('Btc'):
+            response = requests.get(
+            'https://api.coindesk.com/v1/bpi/currentprice.json')
+            data = response.json()
+            #print(data)
+            await message.reply(
+            "<:Bitcoin1:1053606653309747210> Current Price Is " +
+            data["bpi"]["USD"]["rate"] + " US Dollar")
+
         if message.content.startswith('menu'):
+            await message.reply("<:food:1053608403576037506>" +
+                            " เมนูสุ่มได้แก่ : " + random.choice(menu))
+
+        if message.content.startswith('Menu'):
             await message.reply("<:food:1053608403576037506>" +
                             " เมนูสุ่มได้แก่ : " + random.choice(menu))
 
