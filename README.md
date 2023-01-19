@@ -7,7 +7,6 @@
 ```
 pip install discord
 pip install requests
-pip install Flask
 ```
 ### Function
 * Hello
@@ -16,8 +15,8 @@ pip install Flask
 * ...
 
 ### Tool for run 24/7
-1. https://replit.com/
-2. https://uptimerobot.com/
+* https://sys.divahosting.net/
 
 ### Reference
 * https://purewaage.medium.com/
+* https://www.youtube.com/watch?v=BTvE5bpyDw0&ab_channel=CoolZone
