@@ -1,7 +1,6 @@
-# This example requires the 'message_content' privileged intents
-
 import os
 import discord
+import random
 from discord.ext import commands
 
 intents = discord.Intents.default()
@@ -21,5 +20,16 @@ async def ping(ctx):
 async def hello(ctx):
     await ctx.send("Choo choo! 🚅")
 
+@bot.command()
+async def random_message(ctx):
+    messages = [
+        "Hello there!",
+        "How are you today?",
+        "Here's a random message!",
+        "Have a great day!",
+        "Stay positive and happy!"
+    ]
+    response = random.choice(messages)
+    await ctx.send(response)
 
 bot.run(os.environ["DISCORD_TOKEN"])
