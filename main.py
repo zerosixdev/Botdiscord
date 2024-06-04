@@ -1,11 +1,8 @@
 # This example requires the 'message_content' privileged intents
 
 import os
-import random
-import requests
 import discord
 from discord.ext import commands
-
 
 intents = discord.Intents.default()
 intents.message_content = True
