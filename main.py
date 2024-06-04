@@ -1,7 +1,7 @@
 # This example requires the 'message_content' privileged intents
 
 import os
-import random
+import random2
 import requests
 import discord
 from discord.ext import commands
@@ -37,7 +37,7 @@ async def hello(ctx):
 
 @bot.command()
 async def menu(ctx):
-    await ctx.send(random.choice(menu))
+    await ctx.send(random2.choice(menu))
 
 
 bot.run(os.environ["DISCORD_TOKEN"])
