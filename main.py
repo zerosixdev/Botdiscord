@@ -2,8 +2,8 @@
 
 import os
 import discord
-import random
-import requests
+# import random
+# import requests
 from discord.ext import commands
 
 intents = discord.Intents.default()
