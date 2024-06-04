@@ -37,7 +37,7 @@ async def hello(ctx):
 
 @bot.command()
 async def menu(ctx):
-    await ctx.send("<:food:1053608403576037506>" + " เมนูสุ่มได้แก่ : " + random.choice(menu))
+    await ctx.send(random.choice(menu))
 
 
 bot.run(os.environ["DISCORD_TOKEN"])
