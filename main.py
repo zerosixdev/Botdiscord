@@ -39,6 +39,16 @@ async def hello(ctx):
 async def menu(ctx):
     await ctx.send("<:food:1053608403576037506>" + " เมนูสุ่มได้แก่ : " + random.choice(menu))
 
+@bot.command()
+async def btc(ctx):
+            response = requests.get(
+            'https://api.coindesk.com/v1/bpi/currentprice.json')
+            data = response.json()
+            #print(data)
+            await message.reply(
+            "<:Bitcoin1:1053606653309747210> Current Price Is " +
+            data["bpi"]["USD"]["rate"] + " US Dollar")
+
 
 
 bot.run(os.environ["DISCORD_TOKEN"])
