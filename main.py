@@ -3,6 +3,10 @@ import discord
 import aiohttp
 import random
 from discord.ext import commands
+
+# Apply patch to requests package
+import requests_patch
+
 from forex_python.converter import CurrencyRates, RatesNotAvailableError
 
 intents = discord.Intents.default()
@@ -10,6 +14,7 @@ intents.message_content = True
 bot = commands.Bot(command_prefix='!', intents=intents)
 
 currency_rates = CurrencyRates()
+
 
 @bot.event
 async def on_ready():
