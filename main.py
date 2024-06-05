@@ -2,11 +2,10 @@ import os
 import discord
 import aiohttp
 import random
-import requests
 from discord.ext import commands
 
-# Apply patch to requests package
-import requests_patch
+import requests
+from patch_requests import patch_requests
 
 from forex_python.converter import CurrencyRates, RatesNotAvailableError
 
