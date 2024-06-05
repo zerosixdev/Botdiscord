@@ -4,16 +4,9 @@ import aiohttp
 import random
 from discord.ext import commands
 
-import requests
-from patch_requests import patch_requests
-
-from forex_python.converter import CurrencyRates, RatesNotAvailableError
-
 intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix='!', intents=intents)
-
-currency_rates = CurrencyRates()
 
 
 @bot.event
@@ -45,20 +38,10 @@ async def menu(ctx):
 
 @bot.command()
 async def btc(ctx):
-    try:
-        async with aiohttp.ClientSession() as session:
-            async with session.get('https://api.coindesk.com/v1/bpi/currentprice.json') as response:
-                data = await response.json()
-                usd_rate = float(data["bpi"]["USD"]["rate"].replace(',', ''))
-        
-        try:
-            thb_rate = currency_rates.convert('USD', 'THB', usd_rate)
-            thb_rate = round(thb_rate, 2)
-            await ctx.reply(f"<:Bitcoin1:1053606653309747210> Current Price Is {thb_rate} Thai Baht")
-        except RatesNotAvailableError:
-            await ctx.reply("Error: Could not retrieve currency conversion rates.")
-    
-    except aiohttp.ClientError:
-        await ctx.reply("Error: Could not retrieve Bitcoin price data.")
+    async with aiohttp.ClientSession() as session:
+        async with session.get('https://api.coindesk.com/v1/bpi/currentprice.json') as response:
+            data = await response.json()
+            btc_price = data["bpi"]["USD"]["rate"]
+    await ctx.reply(f"<:Bitcoin1:1053606653309747210> Current Price Is {btc_price} US Dollar")
 
 bot.run(os.environ["DISCORD_TOKEN"])
