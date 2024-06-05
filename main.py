@@ -51,6 +51,7 @@ async def Menu(ctx):
     response = random.choice(messages)
     await ctx.reply(response)
 
+@bot.command()
 async def btc(ctx):
     async with aiohttp.ClientSession() as session:
         async with session.get('https://api.coindesk.com/v1/bpi/currentprice.json') as response:
