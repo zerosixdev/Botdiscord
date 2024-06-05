@@ -56,13 +56,9 @@ async def Menu(ctx):
     response = random.choice(messages)
     await ctx.reply(response)
 
-@bot.event
-async def on_message(message):
-    if message.content.startswith('Btc'):
-        btc_price = await fetch_btc_price()
-        await message.reply(
-            f"<:Bitcoin1:1053606653309747210> Current Price Is {btc_price} US Dollar")
-    
-    await bot.process_commands(message)
+async def btc(ctx):
+    btc_price = await fetch_btc_price()
+    await ctx.reply(
+        f"<:Bitcoin1:1053606653309747210> ราคาปัจจุบันคือ {btc_price} ดอลลาร์สหรัฐ"
 
 bot.run(os.environ["DISCORD_TOKEN"])
