@@ -8,7 +8,12 @@ intents = discord.Intents.default()
 intents.message_content = True
 bot = commands.Bot(command_prefix='!', intents=intents)
 
-
+async def fetch_btc_price():
+    async with aiohttp.ClientSession() as session:
+        async with session.get('https://api.coindesk.com/v1/bpi/currentprice.json') as response:
+            data = await response.json()
+            return data["bpi"]["USD"]["rate"]
+            
 @bot.event
 async def on_ready():
     print(f"Logged in as {bot.user}")
@@ -51,14 +56,13 @@ async def Menu(ctx):
     response = random.choice(messages)
     await ctx.reply(response)
 
-@bot.command()
-async def btc(ctx):
-response = requests.get(
-            'https://api.coindesk.com/v1/bpi/currentprice.json')
-            data = response.json()
-            #print(data)
-            await message.reply(
-            "<:Bitcoin1:1053606653309747210> Current Price Is " +
-            data["bpi"]["USD"]["rate"] + " US Dollar")
+@bot.event
+async def on_message(message):
+    if message.content.startswith('Btc'):
+        btc_price = await fetch_btc_price()
+        await message.reply(
+            f"<:Bitcoin1:1053606653309747210> Current Price Is {btc_price} US Dollar")
+    
+    await bot.process_commands(message)
 
 bot.run(os.environ["DISCORD_TOKEN"])
