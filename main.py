@@ -1,6 +1,7 @@
 import os
 import discord
 import random
+import aiohttp
 from discord.ext import commands
 
 intents = discord.Intents.default()
@@ -49,5 +50,17 @@ async def Menu(ctx):
     ]
     response = random.choice(messages)
     await ctx.reply(response)
+
+@bot.event
+async def btc(message):
+    if message.content.startswith('btc'):
+        async with aiohttp.ClientSession() as session:
+            async with session.get('https://api.coindesk.com/v1/bpi/currentprice.json') as response:
+                data = await response.json()
+                await message.reply(
+                    "<:Bitcoin1:1053606653309747210> Current Price Is " +
+                    data["bpi"]["USD"]["rate"] + " US Dollar")
+    
+    await bot.process_commands(message)
 
 bot.run(os.environ["DISCORD_TOKEN"])
